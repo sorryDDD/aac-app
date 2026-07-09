@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>AAC Board Studio</title>
+  <rect width="512" height="512" rx="96" fill="#1f4b4f"/>
+  <rect x="82" y="94" width="348" height="324" rx="48" fill="#f6f7f3"/>
+  <rect x="122" y="134" width="108" height="108" rx="24" fill="#d9654f"/>
+  <rect x="282" y="134" width="108" height="108" rx="24" fill="#6ea18f"/>
+  <rect x="122" y="282" width="108" height="96" rx="24" fill="#f0b75f"/>
+  <rect x="282" y="282" width="108" height="96" rx="24" fill="#335f67"/>
+  <path d="M168 198h16v28h-16zm16-18h18v46h-18zm-34 16h16v30h-16z" fill="#fff"/>
+  <circle cx="336" cy="188" r="28" fill="#fff"/>
+  <path d="M154 336h44" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M320 332h32m-16-16v32" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+</svg>

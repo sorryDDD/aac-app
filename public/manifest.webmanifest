@@ -1,0 +1,28 @@
+{
+  "name": "AAC Board Studio",
+  "short_name": "AAC Board",
+  "description": "Mobile AAC board creation and presentation app.",
+  "id": ".",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "any",
+  "background_color": "#f6f7f3",
+  "theme_color": "#1f4b4f",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
