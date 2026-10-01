@@ -5,6 +5,7 @@ import type { AacButtonRecord, BoardItem, BoardRecord } from '../types/aac';
 import { BOARD_HEIGHT, BOARD_WIDTH, GRID_SIZE } from '../utils/board';
 import { useObjectUrl } from '../hooks/useObjectUrl';
 import { playAudioBlob } from '../services/audio';
+import { useUsageStore } from '../store/usageStore';
 
 interface MovingItem {
   itemId: string;
@@ -25,6 +26,7 @@ interface BoardCanvasProps {
 }
 
 interface BoardCanvasItemProps {
+  board: BoardRecord;
   item: BoardItem;
   button: AacButtonRecord;
   selected: boolean;
@@ -49,6 +51,7 @@ function itemStyle(item: BoardItem, moving?: MovingItem, presentation = false): 
 }
 
 function BoardCanvasItem({
+  board,
   item,
   button,
   selected,
@@ -61,8 +64,17 @@ function BoardCanvasItem({
   const imageUrl = useObjectUrl(button.imageBlob);
 
   const handlePlay = async () => {
+    const occurredAt = Date.now();
+    // Start audio during the user gesture; recording must not delay playback.
+    const playback = playAudioBlob(button.audioBlob);
+    if (presentation) {
+      void useUsageStore.getState().record({
+        occurredAt, boardId: board.id, boardName: board.name,
+        itemId: item.id, buttonId: button.id, buttonName: button.name
+      });
+    }
     try {
-      await playAudioBlob(button.audioBlob);
+      await playback;
     } catch (error) {
       onPlaybackError?.(error instanceof Error ? error.message : '음성을 재생하지 못했습니다.');
     }
@@ -126,6 +138,7 @@ export function BoardCanvas({
           return (
             <BoardCanvasItem
               key={item.id}
+              board={board}
               item={item}
               button={button}
               selected={selectedItemId === item.id}

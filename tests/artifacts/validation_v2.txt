@@ -1,0 +1,34 @@
+PASS: existing board reused; no replacement created
+PASS: v2 materials/Blob bytes unchanged after loading current code
+PASS: all pending writes settled
+PASS: recording off: no event
+PASS: recording starts only after session persistence
+PASS: all pending writes settled
+PASS: editor preview: no event
+PASS: all pending writes settled
+PASS: 50 rapid repeated clicks produce 50 saved events
+PASS: unique IDs preserve repeated presses
+PASS: capture order retained
+PASS: board/item/button context captured
+PASS: all pending writes settled
+PASS: storage failure does not block playback
+PASS: storage failure counted and reported
+PASS: failed write leaves previously saved events intact
+PASS: all pending writes settled
+PASS: stop flushes already submitted writes
+PASS: end timestamp saved
+PASS: all pending writes settled
+PASS: stopped recording: no event
+PASS: CSV BOM and row count match DB
+PASS: CSV keeps Korean, commas, quotes and embedded newlines
+PASS: CSV keeps exact millisecond timestamp
+PASS: local timestamp offset represents the same instant
+PASS: numeric negative timezone offsets remain numeric
+PASS: export does not delete events
+PASS: new DB connection sees persisted events
+PASS: all pending writes settled
+PASS: session filtering isolates each recording
+PASS: failed start does not enable recording
+PASS: AAC fields/photo/audio hashes unchanged after recording, failure, stop and export
+PASS: material schema unchanged; separate recording database
+COMPLETE: all tests passed; original fixture version 2; browser Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36

@@ -44,6 +44,7 @@ import { BoardCanvas } from '../components/BoardCanvas';
 import { BoardLibraryPanel } from '../components/BoardLibraryPanel';
 import { DragPreview } from '../components/DragPreview';
 import { EmptyState } from '../components/EmptyState';
+import { UsageControls } from '../components/UsageControls';
 
 const MOVE_START_THRESHOLD_PX = 8;
 const PRESENTATION_EXIT_HOLD_MS = 3000;
@@ -547,6 +548,8 @@ export function BoardEditorPage() {
           </Stack>
         </Box>
       ) : null}
+
+      <UsageControls presentation={presentationMode} />
 
       <Box className={`boardWorkspace ${presentationMode ? 'boardWorkspacePresentation' : ''}`}>
         {!presentationMode ? (

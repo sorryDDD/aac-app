@@ -860,3 +860,39 @@ textarea:focus-visible,
     border-color: #000000;
   }
 }
+
+
+.usageControls {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #d9ded9;
+  border-radius: 12px;
+}
+
+.usageError {
+  margin-bottom: 16px;
+}
+
+.usagePresentationStatus {
+  position: fixed;
+  z-index: 2100;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #173f43;
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.usagePresentationError {
+  position: fixed;
+  z-index: 2200;
+  top: max(12px, env(safe-area-inset-top));
+  left: 12px;
+  right: 12px;
+}
