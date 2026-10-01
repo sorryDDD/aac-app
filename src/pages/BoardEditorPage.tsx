@@ -549,8 +549,6 @@ export function BoardEditorPage() {
         </Box>
       ) : null}
 
-      <UsageControls presentation={presentationMode} />
-
       <Box className={`boardWorkspace ${presentationMode ? 'boardWorkspacePresentation' : ''}`}>
         {!presentationMode ? (
           <Box className="boardSidePanel">
@@ -621,6 +619,8 @@ export function BoardEditorPage() {
           </Box>
         ) : null}
       </Box>
+
+      <UsageControls presentation={presentationMode} />
 
       {presentationMode ? (
         <>

@@ -896,3 +896,39 @@ textarea:focus-visible,
   left: 12px;
   right: 12px;
 }
+
+.usageCsvPreview {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.usageCsvFilename {
+  overflow-wrap: anywhere;
+}
+
+.usageCsvPreview table {
+  width: max-content;
+  min-width: 100%;
+}
+
+.usageCsvPreview th {
+  white-space: nowrap;
+}
+
+.usageCsvPreview td {
+  min-width: 140px;
+  max-width: 320px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
+.usageCsvPreview td:first-child {
+  min-width: 48px;
+}
+
+.usageCsvPreview td:nth-child(2),
+.usageCsvPreview td:nth-child(5) {
+  white-space: nowrap;
+}

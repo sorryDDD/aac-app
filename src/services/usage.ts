@@ -1,6 +1,7 @@
 import Dexie, { type Table } from 'dexie';
 import type { ButtonPress, UsageEvent, UsageSession } from '../types/usage';
 import { createId } from '../utils/id';
+import { USAGE_CSV_HEADERS } from '../utils/usageCsv';
 
 // Keep recording entirely separate from the existing AAC material database.
 export class UsageDatabase extends Dexie {
@@ -76,8 +77,7 @@ function localTimestamp(event: UsageEvent): string {
 }
 
 export function usageEventsToCsv(events: UsageEvent[]): string {
-  const header = ['sequence', 'event_id', 'session_id', 'event_type', 'timestamp_utc', 'timestamp_local',
-    'timestamp_epoch_ms', 'utc_offset_minutes', 'time_zone', 'board_id', 'board_name', 'item_id', 'button_id', 'button_name'];
+  const header = USAGE_CSV_HEADERS;
   const rows = events.map((event) => [event.sequence ?? '', event.eventId, event.sessionId, 'button_press',
     new Date(event.occurredAt).toISOString(), localTimestamp(event), event.occurredAt, event.utcOffsetMinutes,
     event.timeZone, event.boardId, event.boardName, event.itemId, event.buttonId, event.buttonName]);

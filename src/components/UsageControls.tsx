@@ -3,11 +3,14 @@ import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, T
 import { listUsageSessions, readUsageEvents, usageEventsToCsv } from '../services/usage';
 import { useUsageStore } from '../store/usageStore';
 import type { UsageSession } from '../types/usage';
+import { parseUsageCsv } from '../utils/usageCsv';
+import { UsageCsvPreview } from './UsageCsvPreview';
 
 interface PreparedExport {
   url: string;
   filename: string;
   count: number;
+  rows: string[][];
   selection: string;
   revision: number;
 }
@@ -43,8 +46,10 @@ export function UsageControls({ presentation }: { presentation: boolean }) {
     setExportError(undefined);
     try {
       const events = await readUsageEvents(selected === 'all' ? undefined : selected);
-      const blob = new Blob([usageEventsToCsv(events)], { type: 'text/csv;charset=utf-8' });
-      setPrepared({ url: URL.createObjectURL(blob), count: events.length, selection: selected, revision,
+      const csv = usageEventsToCsv(events);
+      const rows = parseUsageCsv(csv);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      setPrepared({ url: URL.createObjectURL(blob), count: events.length, rows, selection: selected, revision,
         filename: `aac_usage_${selected === 'all' ? 'all' : 'session'}_${new Date().toISOString().slice(0, 10)}.csv` });
     } catch {
       setExportError('CSV 파일을 준비하지 못했습니다. 저장된 기록은 삭제하지 않았습니다.');
@@ -90,10 +95,11 @@ export function UsageControls({ presentation }: { presentation: boolean }) {
             {exportReady && prepared ? <Button component="a" href={prepared.url} download={prepared.filename} variant="contained">CSV 저장</Button> : null}
           </Stack>
           <Typography variant="body2" color="text.secondary">
-            기록을 종료한 뒤 CSV를 준비하고 저장해 주세요. 파일을 내보내도 기록은 유지됩니다.
+            기록을 종료한 뒤 CSV를 준비하면 내용을 미리 볼 수 있습니다. 확인 후 저장해 주세요. 파일을 내보내도 기록은 유지됩니다.
             앱을 다시 열면 기록은 꺼진 상태로 시작하며, 이전에 저장한 기록은 남습니다.
           </Typography>
           {exportReady && prepared ? <Alert severity="success" role="status">{prepared.count}건의 CSV 파일이 준비되었습니다. ‘CSV 저장’을 눌러 파일로 보관해 주세요.</Alert> : null}
+          {exportReady && prepared ? <UsageCsvPreview key={prepared.url} filename={prepared.filename} rows={prepared.rows} /> : null}
           {exportError ? <Alert severity="error">{exportError}</Alert> : null}
         </Box>
       ) : activeSessionId ? <Box className="usagePresentationStatus" role="status">기록 중 · 저장 {saved}건{pending ? ` · 저장 중 ${pending}건` : ''}</Box> : null}
